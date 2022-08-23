@@ -1,14 +1,24 @@
 // Skills icons - https://react-icons.github.io/react-icons/
 import {
-  FaHtml5,
-  FaCss3Alt,
-  FaBootstrap,
   FaReact,
-  FaGitAlt,
   FaGithubSquare,
   FaLink,
+  FaJava,
+  FaAws,
+  FaStripe,
+  FaPython
 } from "react-icons/fa";
-import { SiJavascript, SiStyledcomponents, SiRedux } from "react-icons/si";
+import { 
+  SiJavascript, 
+  SiTypescript, 
+  SiWordpress, 
+  SiAlgolia,
+  SiFirebase,
+  SiMongodb,
+  SiFlutter,
+  SiMysql,
+  SiPostgresql
+ } from "react-icons/si";
 
 // Projects Images (add your images to the images directory and import below)
 import Logo from "./images/logo.svg";
@@ -24,7 +34,7 @@ export { HeroDark as Dark };
  **************************************************************
   Add your GitHub username (string - "YourUsername") below.
 */
-export const githubUsername = "Your GitHub username here";
+export const githubUsername = "ThyDwimmerlaik";
 
 // Blog link icon (imported above)
 export const Blog = <FaLink />;
@@ -43,49 +53,79 @@ export const moreInfo =
 export const skillData = [
   {
     id: 1,
-    skill: <FaHtml5 className="display-4" />,
-    name: "HTML5",
+    skill: <SiJavascript className="display-4" />,
+    name: "Javascript",
   },
   {
     id: 2,
-    skill: <FaCss3Alt className="display-4" />,
-    name: "CSS3",
+    skill: <SiTypescript className="display-4" />,
+    name: "Typescript",
   },
   {
     id: 3,
-    skill: <SiJavascript className="display-4" />,
-    name: "JavaScript",
-  },
-  {
-    id: 4,
-    skill: <FaBootstrap className="display-4" />,
-    name: "BootStrap",
-  },
-  {
-    id: 5,
     skill: <FaReact className="display-4" />,
     name: "React",
   },
   {
+    id: 4,
+    skill: <FaAws className="display-4" />,
+    name: "AWS",
+  },
+  {
+    id: 5,
+    skill: <FaGithubSquare className="display-4" />,
+    name: "Github",
+  },
+  {
     id: 6,
-    skill: <SiStyledcomponents className="display-4" />,
-    name: "Styled Components",
+    skill: <FaJava className="display-4" />,
+    name: "Java"
   },
   {
     id: 7,
-    skill: <SiRedux className="display-4" />,
-    name: "Redux",
+    skill: <SiWordpress className="display-4" />,
+    name: "Wordpress"
   },
   {
     id: 8,
-    skill: <FaGitAlt className="display-4" />,
-    name: "Git",
+    skill: <SiAlgolia className="display-4" />,
+    name: "Algolia"
   },
   {
     id: 9,
-    skill: <FaGithubSquare className="display-4" />,
-    name: "GitHub",
+    skill: <FaStripe className="display-4" />,
+    name: "Stripe"
   },
+  {
+    id: 10,
+    skill: <SiMongodb className="display-4" />,
+    name: "MongoDB"
+  },
+  {
+    id: 11,
+    skill: <SiFirebase className="display-4" />,
+    name: "Firebase"
+  },
+  {
+    id: 12,
+    skill: <SiFlutter className="display-4" />,
+    name: "Flutter"
+  },
+  {
+    id: 13,
+    skill: <SiMysql className="display-4" />,
+    name: "Mysql"
+  },
+  {
+    id: 14,
+    skill: <SiPostgresql className="display-4" />,
+    name: "Postgresql"
+  },
+  {
+    id: 15,
+    skill: <FaPython className="display-4" />,
+    name: "Python"
+  }
 ];
 
 // Resume link (string - "https://YourResumeUrl") - I am using CloudFront to share my resume (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html)
@@ -110,4 +150,4 @@ export const projectCardImages = [
   Add your formspree endpoint below.
   https://formspree.io/
 */
-export const formspreeUrl = "https://formspree.io/f/YourEndpoint";
+export const formspreeUrl = "https://formspree.io/f/mayknqyy";
