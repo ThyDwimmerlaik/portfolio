@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernando Daniel Zurita García — Senior Fullstack Engineer</title>
+<meta name="description" content="Senior Fullstack Engineer with 10 years of experience across React, Node.js, Python, AWS and GraphQL. Based in Mexico City, open to relocation.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg: #0D1117;
+    --bg-elevated: #131A23;
+    --bg-elevated-2: #17202B;
+    --glass-bg: rgba(255,255,255,0.045);
+    --glass-bg-strong: rgba(255,255,255,0.065);
+    --glass-border: rgba(255,255,255,0.09);
+    --glass-border-hover: rgba(232,163,61,0.4);
+    --text-primary: #E7ECF2;
+    --text-secondary: #8E96A6;
+    --text-dim: #565F6E;
+    --accent: #E8A33D;
+    --accent-soft: rgba(232,163,61,0.12);
+    --accent-2: #55C9C7;
+    --accent-2-soft: rgba(85,201,199,0.12);
+    --live: #6FBE7C;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --maxw: 1080px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .nav-inner{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .logo span{ color: var(--accent); }
+  .nav-links{
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .nav-links a{
+    color: var(--text-secondary);
+    transition: color .2s ease;
+    position: relative;
+  }
+  .nav-links a:hover{ color: var(--text-primary); }
+  .nav-cta{
+    background: var(--accent-soft);
+    color: var(--accent) !important;
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(232,163,61,0.3);
+  }
+  .nav-cta:hover{ background: rgba(232,163,61,0.2); }
+  .nav-toggle{
+    display: none;
+    background: none;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 24px 80px;
+    position: relative;
+  }
+  .hero::before, .hero::after{
+    content: '';
+    position: absolute;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.16;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .hero::before{ background: var(--accent); top: -120px; left: -160px; }
+  .hero::after{ background: var(--accent-2); bottom: -160px; right: -140px; }
+
+  .hero-inner{ max-width: var(--maxw); margin: 0 auto; width: 100%; }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--accent-2);
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow .dot{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live);
+    display: inline-block;
+  }
+
+  .hero h1{
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    max-width: 16ch;
+    margin-bottom: 14px;
+  }
+  .hero h1 em{
+    font-style: normal;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-sub{
+    color: var(--text-secondary);
+    font-size: clamp(15px, 1.6vw, 18px);
+    max-width: 52ch;
+    margin-bottom: 40px;
+  }
+
+  /* Terminal window */
+  .terminal{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+    overflow: hidden;
+    max-width: 640px;
+  }
+  .terminal-bar{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.02);
+  }
+  .terminal-dot{ width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-dot.red{ background: #E8695F; }
+  .terminal-dot.yellow{ background: #E8C34F; }
+  .terminal-dot.green{ background: #5FC77E; }
+  .terminal-title{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-left: 8px;
+  }
+  .terminal-body{
+    padding: 20px 22px 26px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+  }
+  .terminal-line{
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--text-secondary);
+  }
+  .terminal-prompt{ color: var(--accent-2); margin-right: 8px; white-space: nowrap; }
+  .terminal-cmd{ color: var(--text-primary); }
+  .cursor{
+    display: inline-block;
+    width: 7px; height: 15px;
+    background: var(--accent);
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+    vertical-align: -2px;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+
+  .terminal-output{
+    margin: 14px 0 16px;
+    padding-left: 4px;
+    color: var(--text-secondary);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .terminal-output.is-visible{ opacity: 1; transform: translateY(0); }
+  .terminal-output .key{ color: var(--accent-2); }
+  .terminal-output .str{ color: #C9D6E3; }
+  .terminal-output .val-accent{ color: var(--accent); }
+
+  .terminal-prompt-2{
+    opacity: 0;
+    transition: opacity .4s ease;
+  }
+  .terminal-prompt-2.is-visible{ opacity: 1; }
+
+  .hero-ctas{
+    display: flex;
+    gap: 14px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn-primary{
+    background: var(--accent);
+    color: #0D1117;
+    font-weight: 600;
+  }
+  .btn-primary:hover{ background: #f0b458; }
+  .btn-ghost{
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--glass-border);
+  }
+  .btn-ghost:hover{ border-color: var(--glass-border-hover); color: var(--accent); }
+
+  /* ---------- Sections (shared) ---------- */
+  .section{
+    padding: 100px 0;
+    border-top: 1px solid var(--glass-border);
+  }
+  .section-head{
+    margin-bottom: 44px;
+  }
+  .section-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent-2);
+    margin-bottom: 10px;
+  }
+  .section-eyebrow::before{ content: '// '; color: var(--text-dim); }
+  .section-title{
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: clamp(20px, 2.6vw, 26px);
+    color: var(--text-primary);
+  }
+  .section-title .prompt-chevron{ color: var(--accent); }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.is-visible{ opacity: 1; transform: translateY(0); }
+
+  /* ---------- About ---------- */
+  .about-card{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 32px 34px;
+    max-width: 760px;
+  }
+  .about-card p{ color: var(--text-secondary); font-size: 16.5px; }
+  .about-card p + p{ margin-top: 16px; }
+  .about-card strong{ color: var(--text-primary); font-weight: 600; }
+  .about-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--glass-border);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+  }
+  .about-meta b{ color: var(--text-secondary); font-weight: 500; }
+
+  /* ---------- Stack ---------- */
+  .stack-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+  .stack-card{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 22px 22px 20px;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .stack-card:hover{ border-color: var(--glass-border-hover); transform: translateY(-2px); }
+  .stack-card h3{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .stack-card h3::after{ content: '/'; color: var(--text-dim); margin-left: 2px; }
+  .tag-list{ display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--glass-border);
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+
+  /* ---------- Experience (git log) ---------- */
+  .log{
+    position: relative;
+    padding-left: 26px;
+    max-width: 760px;
+  }
+  .log::before{
+    content: '';
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--glass-border), transparent);
+  }
+  .commit{
+    position: relative;
+    padding-bottom: 34px;
+  }
+  .commit:last-child{ padding-bottom: 0; }
+  .commit-node{
+    position: absolute;
+    left: -26px; top: 4px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent-2);
+  }
+  .commit.is-current .commit-node{
+    background: var(--live);
+    border-color: var(--live);
+    box-shadow: 0 0 0 4px rgba(111,190,124,0.15);
+  }
+  .commit-meta{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .commit-hash{ color: var(--accent-2); }
+  .commit.is-current .commit-hash{ color: var(--live); }
+  .commit-role{
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .commit-client{
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+  .commit-body{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+  .commit-body ul{ list-style: none; }
+  .commit-body li{
+    color: var(--text-secondary);
+    font-size: 14px;
+    padding-left: 16px;
+    position: relative;
+  }
+  .commit-body li + li{ margin-top: 7px; }
+  .commit-body li::before{
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent-2);
+    font-family: var(--font-mono);
+  }
+
+  /* ---------- Education ---------- */
+  .edu-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    max-width: 760px;
+  }
+  .edu-card{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .edu-card .brace{ color: var(--text-dim); }
+  .edu-row{ margin: 4px 0 4px 14px; }
+  .edu-key{ color: var(--accent-2); }
+  .edu-val{ color: var(--text-secondary); }
+
+  /* ---------- Contact ---------- */
+  .contact-card{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 30px 32px;
+    max-width: 620px;
+  }
+  .contact-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--glass-border);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    flex-wrap: wrap;
+  }
+  .contact-row:last-of-type{ border-bottom: none; }
+  .contact-label{ color: var(--text-dim); min-width: 90px; font-size: 12px; letter-spacing: 0.04em; }
+  .contact-value{ color: var(--text-primary); flex: 1; }
+  .copy-btn{
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+    white-space: nowrap;
+  }
+  .copy-btn:hover{ border-color: var(--glass-border-hover); color: var(--accent); }
+  .copy-btn.is-copied{ color: var(--live); border-color: var(--live); }
+  .status-live{ color: var(--live); display: inline-flex; align-items: center; gap: 8px; }
+  .status-live .dot{ width: 7px; height: 7px; border-radius: 50%; background: var(--live); box-shadow: 0 0 8px var(--live); }
+
+  .contact-cta{ margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  footer{
+    padding: 40px 24px 60px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 720px){
+    .nav-links{
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      background: rgba(13,17,23,0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--glass-border);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+    .nav-links.is-open{ max-height: 340px; }
+    .nav-links a{ padding: 14px 24px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-toggle{ display: inline-flex; }
+    .section{ padding: 70px 0; }
+    .hero{ padding-top: 120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .cursor{ animation: none; opacity: 1; }
+    .reveal, .terminal-output, .terminal-prompt-2{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">daniel<span>@</span>zurita:~$</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">whoami</a>
+      <a href="#stack">stack</a>
+      <a href="#experience">log</a>
+      <a href="#education">edu</a>
+      <a href="#contact" class="nav-cta">say hi</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">menu</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="dot"></span>open to new opportunities</div>
+    <h1>Building the <em>backend, the API, and everything that talks to it.</em></h1>
+    <p class="hero-sub">Fernando Daniel Zurita García — Senior Fullstack Engineer. Ten years shipping production software for travel, insurance and enterprise platforms. Based in Mexico City, open to relocation.</p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">zsh — daniel@zurita</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="terminal-prompt">daniel@zurita:~$</span>
+          <span class="terminal-cmd" id="heroCommand"></span><span class="cursor" id="typingCursor"></span>
+        </div>
+        <div class="terminal-output" id="heroOutput">
+          {<br>
+          &nbsp;&nbsp;<span class="key">"name"</span>: <span class="str">"Fernando Daniel Zurita García"</span>,<br>
+          &nbsp;&nbsp;<span class="key">"role"</span>: <span class="str">"Senior Fullstack Engineer"</span>,<br>
+          &nbsp;&nbsp;<span class="key">"location"</span>: <span class="str">"Mexico City, MX"</span>,<br>
+          &nbsp;&nbsp;<span class="key">"experience"</span>: <span class="val-accent">"10 years"</span>,<br>
+          &nbsp;&nbsp;<span class="key">"core_stack"</span>: [<span class="str">"JavaScript"</span>, <span class="str">"Python"</span>, <span class="str">"AWS"</span>, <span class="str">"React"</span>, <span class="str">"Node.js"</span>],<br>
+          &nbsp;&nbsp;<span class="key">"status"</span>: <span class="val-accent">"open_to_opportunities"</span><br>
+          }
+        </div>
+        <div class="terminal-line terminal-prompt-2" id="heroPrompt2">
+          <span class="terminal-prompt">daniel@zurita:~$</span><span class="cursor"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#experience" class="btn btn-primary">View experience →</a>
+      <a href="Fernando_Daniel_Zurita_Garcia_CV.pdf" download class="btn btn-ghost">Download Resume ↓</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch →</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="section-title"><span class="prompt-chevron">$</span> about me</h2>
+      </div>
+      <div class="about-card reveal">
+        <p>I'm a <strong>software engineer with 10 years of experience</strong> building production systems end to end — from React interfaces for clients like <strong><a target="_blank" href="https://www.realtor.com/">Realtor.com</a></strong> and <strong><a target="_blank" href="https://www.expediagroup.com/">Expedia Group</a></strong>, to AI agent wired into AWS Bedrock for <strong><a target="_blank" href="https://dxc.com/">DXC's AI Labs</a></strong>, to event-driven services running on RabbitMQ and Lambda.</p>
+        <p>I move comfortably across the stack: designing GraphQL schemas and REST APIs, shaping frontend state with React and Redux, and keeping CI/CD pipelines healthy along the way. I've also led technical interviews and gathered requirements directly with stakeholders, so I'm as comfortable in a client conversation as I am in a pull request.</p>
+        <p>Currently based in <strong>Mexico City</strong>, open to relocation, and looking for the next big project.</p>
+        <div class="about-meta">
+          <span><b>Degree</b> B.S. Computer Engineering, UNAM</span>
+          <span><b>Certification</b> Data Science, Tec de Monterrey</span>
+          <span><b>Languages</b> Spanish - native, English - C1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="stack">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="section-title"><span class="prompt-chevron">$</span> stack</h2>
+      </div>
+      <div class="stack-grid reveal">
+        <div class="stack-card">
+          <h3>frontend</h3>
+          <div class="tag-list">
+            <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React</span>
+            <span class="tag">Redux</span><span class="tag">GraphQL</span><span class="tag">Jest</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <h3>backend</h3>
+          <div class="tag-list">
+            <span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Django</span>
+            <span class="tag">REST APIs</span><span class="tag">C# / .NET</span><span class="tag">Java</span>
+            <span class="tag">Progress OpenEdge</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <h3>cloud-devops</h3>
+          <div class="tag-list">
+            <span class="tag">AWS</span><span class="tag">AWS Lambda</span><span class="tag">AWS Bedrock</span>
+            <span class="tag">GCP</span><span class="tag">Firebase</span><span class="tag">GitHub Actions</span>
+            <span class="tag">CircleCI</span><span class="tag">Bash</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <h3>data-tools</h3>
+          <div class="tag-list">
+            <span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span>
+            <span class="tag">RabbitMQ</span><span class="tag">Jira</span><span class="tag">Confluence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="section-title"><span class="prompt-chevron">$</span> experience</h2>
+      </div>
+
+      <div class="log reveal">
+
+        <div class="commit is-current">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">a1f4c9e</span><span>May 2026 → present</span></div>
+          <div class="commit-role">Software Developer — Solera</div>
+          <div class="commit-client">Vehicle Claims · Fulltime, Hybrid</div>
+          <div class="commit-body">
+            <ul>
+              <li>Development of Progress OpenEdge scripts and queries</li>
+              <li>Development of web components using C# and .NET</li>
+              <li>Maintenance of Bash scripts for build and deployment of environments</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">7c2e81b</span><span>May 2025 → Feb 2026</span></div>
+          <div class="commit-role">Senior Fullstack Developer — Tavant</div>
+          <div class="commit-client">Client: Realtor.com · Contractor, Remote</div>
+          <div class="commit-body">
+            <ul>
+              <li>React.js components with corresponding unit tests using Jest</li>
+              <li>GraphQL integrations and authentication handling via custom hooks</li>
+              <li>GraphQL query and mutation implementations</li>
+              <li>State management with React context and Redux</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">4d90aa3</span><span>May 2024 → May 2025</span></div>
+          <div class="commit-role">Senior Fullstack Developer — Luxoft</div>
+          <div class="commit-client">Client: DXC SEA AI Labs · Fulltime, Remote</div>
+          <div class="commit-body">
+            <ul>
+              <li>Web application in Django connected to an AI agent on AWS Bedrock</li>
+              <li>Serverless web services using AWS Lambda</li>
+              <li>Development and maintenance of CI/CD pipelines</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">2b6f0d7</span><span>Apr 2022 → Feb 2024</span></div>
+          <div class="commit-role">Senior Fullstack Developer — Luxoft</div>
+          <div class="commit-client">Client: Expedia Group · Fulltime, Remote</div>
+          <div class="commit-body">
+            <ul>
+              <li>React.js components with corresponding unit tests using Jest</li>
+              <li>GraphQL integrations and authentication handling via custom hooks</li>
+              <li>Event-triggered web services using RabbitMQ</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">e83a15c</span><span>Nov 2021 → Jan 2022</span></div>
+          <div class="commit-role">Lead Fullstack Developer — Advanced Mankind</div>
+          <div class="commit-client">Fulltime, Remote</div>
+          <div class="commit-body">
+            <ul>
+              <li>Requirements gathering directly with clients and stakeholders</li>
+              <li>Led technical interviews, evaluating experience and prior team responsibilities</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">9f47b2a</span><span>Feb 2019 → Nov 2021</span></div>
+          <div class="commit-role">Senior Fullstack Developer — Advanced Mankind</div>
+          <div class="commit-client">Fulltime, Hybrid · incl. Client: Chedraui (Feb 2019 – Mar 2020)</div>
+          <div class="commit-body">
+            <ul>
+              <li>Data pipelines for an insurance event-driven web service</li>
+              <li>Voice-driven AI assistant able to communicate with end users through speech capture</li>
+              <li>Web catalog platform for hunting and fishing activities</li>
+              <li>Mobile application and event-driven omni-channel services for Chedraui, a major retail chain</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">6a1c8e4</span><span>Feb 2019 → Mar 2020</span></div>
+          <div class="commit-role">Fullstack Developer — Freelance</div>
+          <div class="commit-client">Remote</div>
+          <div class="commit-body">
+            <ul>
+              <li>Web platform for inventory transactions</li>
+              <li>Web application for home repair services</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">3d5f92b</span><span>Jan 2018 → Feb 2019</span></div>
+          <div class="commit-role">Web Developer — Smartbelab</div>
+          <div class="commit-client">Fulltime, On site</div>
+          <div class="commit-body">
+            <ul>
+              <li>WordPress-based news websites</li>
+              <li>E-commerce sites</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-node"></div>
+          <div class="commit-meta"><span class="commit-hash">1e0a7c6</span><span>Oct 2015 → Apr 2017</span></div>
+          <div class="commit-role">Web Developer — COFEPRIS</div>
+          <div class="commit-client">Federal Government of Mexico · Fulltime, On site</div>
+          <div class="commit-body">
+            <ul>
+              <li>Development and maintenance of JavaScript modules for internal government applications</li>
+              <li>Web application supporting government field agents in emergency zones</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="section-title"><span class="prompt-chevron">$</span> education</h2>
+      </div>
+      <div class="edu-grid reveal">
+        <div class="edu-card">
+          <div class="brace">{</div>
+          <div class="edu-row"><span class="edu-key">"institution"</span>: <span class="edu-val">"UNAM"</span>,</div>
+          <div class="edu-row"><span class="edu-key">"degree"</span>: <span class="edu-val">"B.S. Computer Engineering"</span></div>
+          <div class="brace">}</div>
+        </div>
+        <div class="edu-card">
+          <div class="brace">{</div>
+          <div class="edu-row"><span class="edu-key">"institution"</span>: <span class="edu-val">"Tecnológico de Monterrey"</span>,</div>
+          <div class="edu-row"><span class="edu-key">"certification"</span>: <span class="edu-val">"Data Science Postgraduate"</span></div>
+          <div class="brace">}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="section-title"><span class="prompt-chevron">$</span>Contact</h2>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-row">
+          <span class="contact-label">EMAIL</span>
+          <span class="contact-value">zurita.daniel@hotmail.com</span>
+          <button class="copy-btn" data-copy="zurita.daniel@hotmail.com">copy</button>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">PHONE</span>
+          <span class="contact-value">+52 55 4939 9647</span>
+          <button class="copy-btn" data-copy="+52 55 4939 9647">copy</button>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">LOCATION</span>
+          <span class="contact-value">Mexico City, MX — open to relocation</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">GITHUB</span>
+          <span class="contact-value">ThyDwimmerlaik</span>
+          <a href="https://github.com/ThyDwimmerlaik" target="_blank" rel="noopener" class="copy-btn">open ↗</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">LINKEDIN</span>
+          <span class="contact-value">fernando-daniel-zurita-garcía</span>
+          <a href="https://www.linkedin.com/in/fernando-daniel-zurita-garc%C3%ADa-0710655b/" target="_blank" rel="noopener" class="copy-btn">open ↗</a>
+        </div>
+        <div class="contact-cta">
+          <a target="_blank" href="mailto:zurita.daniel@hotmail.com" class="btn btn-primary">Send an email</a>
+          <a target="_blank" href="https://wa.me/525549399647" class="btn btn-ghost">Send a whatsapp</a>
+          <a target="_blank" href="tel:+525549399647" class="btn btn-secondary">Call </a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">STATUS</span>
+          <span class="contact-value status-live"><span class="dot"></span>open to opportunities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>Fernando Daniel Zurita García — Senior Fullstack Engineer · Mexico City · Built with terminal habits, deployed to the web.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('is-open')));
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const value = btn.getAttribute('data-copy');
+      try{
+        await navigator.clipboard.writeText(value);
+      }catch(e){ /* clipboard unavailable — value is already visible as text */ }
+      const original = btn.textContent;
+      btn.textContent = 'copied ✓';
+      btn.classList.add('is-copied');
+      setTimeout(() => { btn.textContent = original; btn.classList.remove('is-copied'); }, 1600);
+    });
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+
+  if (reduceMotion){
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  const cmdEl = document.getElementById('heroCommand');
+  const outputEl = document.getElementById('heroOutput');
+  const prompt2El = document.getElementById('heroPrompt2');
+  const typingCursor = document.getElementById('typingCursor');
+  const command = 'curl -s api.danielzurita.dev/whoami | jq';
+
+  if (reduceMotion){
+    cmdEl.textContent = command;
+    outputEl.classList.add('is-visible');
+    prompt2El.classList.add('is-visible');
+    if (typingCursor) typingCursor.style.display = 'none';
+  } else {
+    let i = 0;
+    function typeChar(){
+      if (i < command.length){
+        cmdEl.textContent += command[i];
+        i++;
+        setTimeout(typeChar, 26 + Math.random() * 34);
+      } else {
+        if (typingCursor) typingCursor.style.display = 'none';
+        setTimeout(() => {
+          outputEl.classList.add('is-visible');
+          setTimeout(() => prompt2El.classList.add('is-visible'), 500);
+        }, 250);
+      }
+    }
+    setTimeout(typeChar, 550);
+  }
+});
+</script>
+
+</body>
+</html>
